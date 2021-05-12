@@ -1,65 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_starter/auth_builder.dart';
+import 'package:flutter_starter/auth_widget.dart';
+import 'package:flutter_starter/data/states/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider<AuthProvider>(
+    create: (_) => AuthProvider(),
+    child: RenderScreens(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class RenderScreens extends StatefulWidget {
+  RenderScreens({Key? key}) : super(key: key);
+
+  @override
+  _RenderScreensState createState() => _RenderScreensState();
+}
+
+class _RenderScreensState extends State<RenderScreens> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
-
-  final String? title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title!),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+    return AuthBuilder(
+      builder: (context, authStatus) {
+        return MaterialApp(
+          title: 'Flutter Starter',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: AuthWidget(authStatus),
+        );
+      },
     );
   }
 }
