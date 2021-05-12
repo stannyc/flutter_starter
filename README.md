@@ -9,3 +9,4 @@ Flutter Starter boilerplate I use for my projects
 - [Json Annotation](https://pub.dev/packages/json_annotation),
 - [Equatable](https://pub.dev/packages/equatable)
 - [http](https://pub.dev/packages/http)
+- [Build Runner](https://pub.dev/packages/build_runner/install)
